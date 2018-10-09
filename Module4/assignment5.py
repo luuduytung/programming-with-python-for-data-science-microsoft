@@ -37,26 +37,6 @@ for image_path in glob.glob("Datasets/ALOI/32/*.png"):
     X = image.reshape(-1)
     samples.append(X)
     
-for image_path in glob.glob("Datasets/ALOI/32i/*.png"):
-    image = misc.imread(image_path)
-    image = image[::2,::2]
-    X = image.reshape(-1)
-    samples2.append(X)
-    
-df = pd.DataFrame(samples)
-dfi = pd.DataFrame(samples2)
-dfi['col'] = 'blue'
-df_merge = pd.concat([df,dfi])
-
-from sklearn.manifold import Isomap
-
-iso = Isomap(n_components=3)
-iso.fit(df_merge.drop('col',axis=1))
-T = iso.fit_transform(df_merge.drop('col',axis=1))
-
-iso2 = Isomap(n_components=3)
-iso2.fit(df)
-Ti = iso2.fit_transform(dfi)
 
 #
 
@@ -68,17 +48,21 @@ Ti = iso2.fit_transform(dfi)
 #
 # .. your code here .. 
 
-plt.scatter(T[:72,0],T[:72,1],color='red')
-plt.scatter(T[72:,0],T[72:,1],color='blue')
+for image_path in glob.glob("Datasets/ALOI/32i/*.png"):
+    image = misc.imread(image_path)
+    image = image[::2,::2]
+    X = image.reshape(-1)
+    samples2.append(X)
+    
 
-fig = plt.figure()
-ax = fig.add_subplot(111,projection='3d')
-ax.scatter(T[:72,0],T[:72,1],T[:72,2],color='red')
-ax.scatter(T[72:,0],T[72:,1],T[72:,2],color='blue')
 #
 # TODO: Convert the list to a dataframe
 #
 # .. your code here .. 
+df = pd.DataFrame(samples)
+dfi = pd.DataFrame(samples2)
+dfi['col'] = 'blue'
+df_merge = pd.concat([df,dfi])
 
 
 
@@ -87,6 +71,17 @@ ax.scatter(T[72:,0],T[72:,1],T[72:,2],color='blue')
 # to three components, using K=6 for your neighborhood size
 #
 # .. your code here .. 
+from sklearn.manifold import Isomap
+
+iso = Isomap(n_neighbors=6,n_components=3)
+iso.fit(df_merge.drop('col',axis=1))
+T = iso.fit_transform(df_merge.drop('col',axis=1))
+
+iso2 = Isomap(n_neighbors=6,n_components=3)
+iso2.fit(df)
+Ti = iso2.fit_transform(dfi)
+
+
 
 
 
@@ -97,6 +92,8 @@ ax.scatter(T[72:,0],T[72:,1],T[72:,2],color='blue')
 #
 # .. your code here .. 
 
+plt.scatter(T[:72,0],T[:72,1],color='red')
+plt.scatter(T[72:,0],T[72:,1],color='blue')
 
 
 
@@ -106,6 +103,10 @@ ax.scatter(T[72:,0],T[72:,1],T[72:,2],color='blue')
 #
 # .. your code here .. 
 
+fig = plt.figure()
+ax = fig.add_subplot(111,projection='3d')
+ax.scatter(T[:72,0],T[:72,1],T[:72,2],color='red')
+ax.scatter(T[72:,0],T[72:,1],T[72:,2],color='blue')
 
 
 plt.show()

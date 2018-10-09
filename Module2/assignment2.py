@@ -4,12 +4,10 @@ import pandas as pd
 #
 # .. your code here ..
 df = pd.read_csv('Datasets/tutorial.csv')
-print(df)
-df.describe()
-df.loc[2:4,'col3']
 # TODO: Print the results of the .describe() method
 #
 # .. your code here ..
+df.describe()
 
 
 
@@ -18,4 +16,5 @@ df.loc[2:4,'col3']
 # And print the results
 #
 # .. your code here ..
+df.loc[2:4,'col3']
 

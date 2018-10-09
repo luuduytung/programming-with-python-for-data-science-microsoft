@@ -146,7 +146,7 @@ T_test = model_pca.transform(X_test)
 #
 # .. your code here ..
 from sklearn.neighbors import KNeighborsClassifier
-knn = KNeighborsClassifier(n_neighbors = 1)
+knn = KNeighborsClassifier(n_neighbors = 9)
 #T_traindf = pd.DataFrame(T_train)
 #y_train = pd.DataFrame([y_train])
 knn.fit(T_train,y_train)
@@ -166,14 +166,6 @@ plotDecisionBoundary(knn, T_train, y_train)
 # .score will take care of running your predictions for you automatically.
 #
 # .. your code here ..
-
-
-
-
-#
-# BONUS: Instead of the ordinal conversion, try and get this assignment
-# working with a proper Pandas get_dummies for feature encoding. HINT:
-# You might have to update some of the plotDecisionBoundary code.
 
 
 plt.show()

@@ -37,13 +37,6 @@ df.plot(kind='scatter',x='compactness',y='width')
 
 
 
-# BONUS TODO:
-# After completing the above, go ahead and run your program
-# Check out the results, and see what happens when you add
-# in the optional display parameter marker with values of
-# either '^', '.', or 'o'.
-
-
 plt.show()
 
 
